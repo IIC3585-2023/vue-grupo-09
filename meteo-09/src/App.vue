@@ -1,8 +1,35 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+//7var info = null;
 </script>
+<script>
+  export default {
+  mounted() {
+    fetch('http://api.openweathermap.org/data/2.5/weather?lat=-33.45694&lon=-70.64827&appid=ddec887a4abcfa9dca8520346d2b065c')
+      .then(response => response.json())
+      .then(data => {
+        // Aquí puedes acceder a los datos de respuesta y utilizarlos en tu componente
+        console.log(data);
+      })
+      .catch(error => {
+        // Manejo de errores
+        console.error(error);
+      });
+  }
+}
+  // import axios from 'axios';
+  // mounted () {
+  //   axios
+  //   .get('http://api.openweathermap.org/data/2.5/weather?lat=-33.45694&lon=-70.64827&appid=ddec887a4abcfa9dca8520346d2b065c')
+  //   .then(response => (this.info = response.data))
+  // }
+  // var latitude = -33.45694;
+  // var longitude = -70.64827;
+  // var apiKey = 'ddec887a4abcfa9dca8520346d2b065c';
+  // var url = 'http://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitide&appid=$apiKey'
 
+</script>
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
