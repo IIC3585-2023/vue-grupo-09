@@ -30,7 +30,7 @@ function selectPeriod (period: Period) {
         {{ period }}
       </a>
     </span>
-    <!-- <WeatherItem v-for="weather of weathers" :key="weather.period" :weather="weather" /> -->
-      <WeatherItem :weather="weatherStore.weather" />
+    <WeatherItem v-if="selectedPeriod === 'Ahora'" :weather="weatherStore.weather" />
+    <WeatherItem v-else v-for="weather of weatherStore.weathers" :key="weather.dt" :weather="weather" />
   </nav>
 </template>

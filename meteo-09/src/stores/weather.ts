@@ -3,9 +3,10 @@ import { Weather } from '../scripts/weather'
 
 interface WeatherState {
   weather: Weather
+  weathers: Weather[]
 }
 
-export const useWeather = defineStore('weather', {
+export const useWeather = defineStore('weathers', {
   state: (): WeatherState => ({
     weather: {
       dt: '',
@@ -15,12 +16,16 @@ export const useWeather = defineStore('weather', {
       temp_max: 0,
       pressure: 0,
       humidity: 0
-    }
+    },
+    weathers: []
   }),
 
   actions: {
     updateWeather(weather: Weather) {
       this.weather = weather
+    },
+    updateWeathers(weathers: Weather[]) {
+      this.weathers = weathers
     }
   }
 })
