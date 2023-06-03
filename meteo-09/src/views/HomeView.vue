@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Weather, today, thisWeek, sixteenDays } from '../scripts/weather'
+import { useWeather } from '../stores/weather'
 import WeatherItem from '../components/WeatherItem.vue';
+
+const weathersStore = useWeather()
 
 const periods = ['Hoy', 'Esta semana', 'Próximos 16 días'] as const
 
@@ -21,6 +24,7 @@ const weathers = computed<Weather[]>(() => [
 </script>
 
 <template>
+  {{ weathersStore.dt }} 
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <!-- : -> v-bind: and @ -> v-on: -->
