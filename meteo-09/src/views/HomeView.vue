@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <nav class="is-primary panel">
+    <span class="panel-tabs">
+      <a>Today</a>
+    </span>
+  </nav>
 </template>
