@@ -1,37 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Weather, today, thisWeek, sixteenDays } from '../scripts/weather'
 import { useWeather } from '../stores/weather'
 import WeatherItem from '../components/WeatherItem.vue';
+import { periods } from '../scripts/constants';
 
-const weathersStore = useWeather()
-
-const periods = ['Hoy', 'Esta semana', 'Próximos 16 días'] as const
-
-type Period = typeof periods[number]
-
-const selectedPeriod = ref<Period>(periods[0])
-
-function selectPeriod (period: Period) {
-  selectedPeriod.value = period
-}
-
-const weathers = computed<Weather[]>(() => [
-  today,
-  thisWeek,
-  sixteenDays
-].filter(weather => weather.period === selectedPeriod.value))
+const weatherStore = useWeather()
 </script>
 
 <template>
-  {{ weathersStore.dt }} 
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <!-- : -> v-bind: and @ -> v-on: -->
-      <a v-for="period of periods" :key="period" :class="{ 'is-active': period === selectedPeriod }" @click="selectPeriod(period)">
+      <a v-for="period of periods" :key="period" :class="{ 'is-active': period === weatherStore.selectedPeriod }" @click="weatherStore.setSelectedPeriod(period)">
         {{ period }}
       </a>
     </span>
-    <WeatherItem v-for="weather of weathers" :key="weather.period" :weather="weather" />
+    <WeatherItem v-for="weather of weatherStore.filteredWeathers" :key="weather.dt" :weather="weather" />
   </nav>
 </template>
