@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Weather, today, thisWeek, sixteenDays } from '../scripts/weather'
+import { ref } from 'vue'
 import { useWeather } from '../stores/weather'
 import WeatherItem from '../components/WeatherItem.vue';
 
-const weathersStore = useWeather()
+const weatherStore = useWeather()
 
-const periods = ['Hoy', 'Esta semana', 'Próximos 16 días'] as const
+const periods = ['Ahora', 'Próximos 5 días'] as const
 
 type Period = typeof periods[number]
 
@@ -16,15 +15,14 @@ function selectPeriod (period: Period) {
   selectedPeriod.value = period
 }
 
-const weathers = computed<Weather[]>(() => [
-  today,
-  thisWeek,
-  sixteenDays
-].filter(weather => weather.period === selectedPeriod.value))
+// const weathers = computed<Weather[]>(() => [
+//   today,
+//   thisWeek,
+//   sixteenDays
+// ].filter(weather => weather.period === selectedPeriod.value))
 </script>
 
 <template>
-  {{ weathersStore.dt }} 
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <!-- : -> v-bind: and @ -> v-on: -->
@@ -32,6 +30,7 @@ const weathers = computed<Weather[]>(() => [
         {{ period }}
       </a>
     </span>
-    <WeatherItem v-for="weather of weathers" :key="weather.period" :weather="weather" />
+    <!-- <WeatherItem v-for="weather of weathers" :key="weather.period" :weather="weather" /> -->
+      <WeatherItem :weather="weatherStore.weather" />
   </nav>
 </template>
