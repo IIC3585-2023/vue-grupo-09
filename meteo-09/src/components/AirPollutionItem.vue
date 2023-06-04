@@ -4,14 +4,21 @@ import { AirPollution } from '../scripts/airPollution';
 defineProps<{
   airPollution: AirPollution
 }>()
+
+const aqiColors: { [key: number]: string } = {
+  1: 'is-success',
+  2: 'is-warning is-light',
+  3: 'is-warning',
+  4: 'is-danger is-light',
+  5: 'is-danger',
+}
 </script>
 
 <template>
   <div class="card my-2">
     <div class="card-content">
       <div class="content">
-        <span
-          :class="`tag is-medium ${airPollution.aqi <= 1 ? 'is-success' : airPollution.aqi > 1 && airPollution.aqi <= 4 ? 'is-warning' : 'is-danger'}`">
+        <span :class="`tag is-medium ${aqiColors[airPollution.aqi]}`">
           AQI (Índice de Calidad del Aire):
           {{ airPollution.aqi }}
         </span>
