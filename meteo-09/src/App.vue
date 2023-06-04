@@ -20,6 +20,7 @@ export default {
           temp_max: data.main.temp_max,
           pressure: data.main.pressure,
           humidity: data.main.humidity,
+          type_weather: data.weather[0].main,
         };
         useWeather().updateWeather(weather);
       })
@@ -41,6 +42,7 @@ export default {
             temp_max: weather.main.temp_max,
             pressure: weather.main.pressure,
             humidity: weather.main.humidity,
+            type_weather: data.weather[0].main,
           };
         })
         useWeather().updateWeathers(weathers);
