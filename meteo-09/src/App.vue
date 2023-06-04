@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
   <div class="section">
     <div class="container">
-      <Suspense>
-        <template #default>
-          <HomeView />
-        </template>
-        <template #fallback>
-          <progress class="progress is-primary"></progress>
-        </template>
-      </Suspense>
+      <RouterView />
     </div>
   </div>
 </template>
