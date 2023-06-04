@@ -8,7 +8,7 @@ const modal = useModal();
   <div class="navbar">
     <div class="navbar-start">
       <div class="buttons">
-        <button class="button" @click="modal.showModal">Add City</button>
+        <button class="button" @click="modal.showModal">Añadir Ciudad</button>
       </div>
     </div>
     <div class="navbar-end">
