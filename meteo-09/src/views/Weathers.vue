@@ -4,13 +4,19 @@ import WeatherItem from '../components/WeatherItem.vue';
 import { periods } from '../scripts/constants';
 
 const weatherStore = useWeather()
+
+await Promise.all([
+  weatherStore.fetchWeather(),
+  weatherStore.fetchWeathers()
+])
 </script>
 
 <template>
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <!-- : -> v-bind: and @ -> v-on: -->
-      <a v-for="period of periods" :key="period" :class="{ 'is-active': period === weatherStore.selectedPeriod }" @click="weatherStore.setSelectedPeriod(period)">
+      <a v-for="period of periods" :key="period" :class="{ 'is-active': period === weatherStore.selectedPeriod }"
+        @click="weatherStore.setSelectedPeriod(period)">
         {{ period }}
       </a>
     </span>
