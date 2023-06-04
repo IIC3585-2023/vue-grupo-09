@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { DateTime } from 'luxon'
 import { Weather } from '../scripts/weather'
-import { Period } from '../scripts/constants'
+import { Period, periods } from '../scripts/constants'
 
 interface WeatherState {
   weather: Weather
@@ -22,7 +22,7 @@ export const useWeather = defineStore('weathers', {
       type_weather: ''
     },
     weathers: [],
-    selectedPeriod: 'Ahora'
+    selectedPeriod: 'Ahora',
   }),
 
   actions: {
@@ -47,13 +47,13 @@ export const useWeather = defineStore('weathers', {
         console.error(error);
       });
     },
+
     async fetchWeathers() {
       await fetch('https://api.openweathermap.org/data/2.5/forecast?lat=-33.45694&lon=-70.64827&appid=ddec887a4abcfa9dca8520346d2b065c&units=metric&lang=es')
     .then(response => response.json())
       .then(data => {
         console.log(data);
-        const { list } = data;
-        const weathers = list.map((weather: { dt: number; main: { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; }; weather:[{main:string;}] }) => {
+        const weathers = data.list.map((weather: { dt: number; main: { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; }; weather: any }) => {
           return {
             dt: DateTime.fromSeconds(weather.dt).toLocal().toFormat('ff') || '',
             temp: weather.main.temp,
@@ -71,12 +71,15 @@ export const useWeather = defineStore('weathers', {
         console.error(error);
       });
     },
+
     setSelectedPeriod(period: Period) {
       this.selectedPeriod = period
     },
+
     updateWeather(weather: Weather) {
       this.weather = weather
     },
+
     updateWeathers(weathers: Weather[]) {
       this.weathers = weathers
     }
@@ -85,13 +88,13 @@ export const useWeather = defineStore('weathers', {
   getters: {
     filteredWeathers: (state): Weather[] => {
       switch (state.selectedPeriod) {
-        case 'Ahora':
+        case periods[0]:
           return [state.weather]
-        case 'Hoy':
+        case periods[1]:
           return state.weathers.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal(), 'day'))
-        case 'Mañana':
+        case periods[2]:
           return state.weathers.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: 1 }), 'day'))
-        case 'Próximos 5 días':
+        case periods[3]:
           return state.weathers
       }
     }

@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card">
+  <div class="card my-2">
     <div class="card-content">
       <figure v-if="weather.type_weather == 'Clouds'" class="image is-48x48">
         <img src="../assets/cloudy.png" alt="cloudy day">
@@ -18,14 +18,14 @@ defineProps<{
       <figure v-else-if="weather.type_weather == 'Clear'" class="image is-48x48">
         <img src="../assets/sun.png" alt="sunny day">
       </figure>
-      <br/>
+      <br />
       <p class="title is-4">{{ weather.dt }}</p>
-      <p class="subtitle is-6">{{weather.temp}}°C</p>
-  
+      <p class="subtitle is-6">{{ weather.temp }}°C</p>
+
       <div class="content">
         <p>Se siente como: {{ weather.feels_like }}°C</p>
-          <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
-          <p>Humedad: {{ weather.humidity }}%</p>
+        <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
+        <p>Humedad: {{ weather.humidity }}%</p>
         <div class="tags has-addons">
           <span class="tag is-info is-medium">{{ weather.temp_min }}°C</span>
           <span class="tag is-primary is-medium">{{ weather.temp_max }}°C</span>
