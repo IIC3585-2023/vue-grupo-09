@@ -95,13 +95,13 @@ export const useAirPollution = defineStore('airPollution', {
   getters: {
     filteredAirPollutions: (state): AirPollution[] => {
       switch (state.selectedPeriod) {
-        case periods[0]:
+        case periods[0]: // Ahora
           return [state.airPollution]
-        case periods[1]:
+        case periods[1]: // Hoy
           return state.airPollutions.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal(), 'day'))
-        case periods[2]:
+        case periods[2]: // Mañana
           return state.airPollutions.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: 1 }), 'day'))
-        case periods[3]:
+        case periods[3]: // Próximos 5 días
           return state.airPollutions
       }
     }
