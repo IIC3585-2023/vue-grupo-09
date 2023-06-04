@@ -21,7 +21,7 @@ export const useWeather = defineStore('weathers', {
       humidity: 0
     },
     weathers: [],
-    selectedPeriod: 'Ahora'
+    selectedPeriod: 'Ahora',
   }),
 
   actions: {

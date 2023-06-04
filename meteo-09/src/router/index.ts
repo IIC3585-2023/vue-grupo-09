@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import AirPollution from '../views/AirPollution.vue'
+// import Map from '../views/Map.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -9,6 +11,16 @@ const router = createRouter({
       name: 'home',
       component: Home
     },
+    {
+      path: '/air-pollution',
+      name: 'air-pollution',
+      component: AirPollution
+    },
+    // {
+    //   path: '/map',
+    //   name: 'map',
+    //   component: Map
+    // },
   ]
 })
 
