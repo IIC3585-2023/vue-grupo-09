@@ -18,7 +18,8 @@ export const useWeather = defineStore('weathers', {
       temp_min: 0,
       temp_max: 0,
       pressure: 0,
-      humidity: 0
+      humidity: 0,
+      type_weather: ''
     },
     weathers: [],
     selectedPeriod: 'Ahora'
