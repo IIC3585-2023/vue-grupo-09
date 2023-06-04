@@ -29,7 +29,7 @@ export const useAirPollution = defineStore('airPollution', {
 
   actions: {
     async fetchAirPollution() {
-      await fetch('https://api.openweathermap.org/data/2.5/air_pollution?lat=-33.45694&lon=-70.64827&appid=ddec887a4abcfa9dca8520346d2b065c')
+      await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=-33.45694&lon=-70.64827&appid=${import.meta.env.VITE_API_KEY}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -54,7 +54,7 @@ export const useAirPollution = defineStore('airPollution', {
     },
 
     async fetchAirPollutions() {
-      await fetch('https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=-33.45694&lon=-70.64827&appid=ddec887a4abcfa9dca8520346d2b065c')
+      await fetch(`https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=-33.45694&lon=-70.64827&appid=${import.meta.env.VITE_API_KEY}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
