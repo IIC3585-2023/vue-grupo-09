@@ -18,15 +18,10 @@ defineProps<{
       <figure v-else-if="weather.type_weather == 'Clear'" class="image is-48x48">
         <img src="../assets/sun.png" alt="sunny day">
       </figure>
-      <div class="media">
-        <div class="media-content">
-          <p class="title is-4">{{ weather.dt }}</p>
-          <p class="subtitle is-6">{{weather.temp}}°C</p>
-        </div>
-      </div>
-
-      
-
+      <br/>
+      <p class="title is-4">{{ weather.dt }}</p>
+      <p class="subtitle is-6">{{weather.temp}}°C</p>
+  
       <div class="content">
         <p>Se siente como: {{ weather.feels_like }}°C</p>
           <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
