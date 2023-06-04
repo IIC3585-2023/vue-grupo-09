@@ -6,4 +6,5 @@ export interface Weather {
   temp_max: number
   pressure: number
   humidity: number
+  type_weather: string
 }

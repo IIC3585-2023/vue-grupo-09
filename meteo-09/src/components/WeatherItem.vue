@@ -7,13 +7,30 @@ defineProps<{
 </script>
 
 <template>
-  <a class="panel-block is-flex is-flex-direction-column">
-    <p>{{ weather.dt }}</p>
-    <p>Temperatura actual: {{ weather.temp }}°C</p>
-    <p>Se siente como: {{ weather.feels_like }}°C</p>
-    <p>Temperatura mínima: {{ weather.temp_min }}°C</p>
-    <p>Temperatura máxima: {{ weather.temp_max }}°C</p>
-    <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
-    <p>Humedad: {{ weather.humidity }}%</p>
-  </a>
+  <div class="card">
+    <div class="card-content">
+      <figure v-if="weather.type_weather == 'Clouds'" class="image is-48x48">
+        <img src="../assets/cloudy.png" alt="cloudy day">
+      </figure>
+      <figure v-else-if="weather.type_weather == 'Rain'" class="image is-48x48">
+        <img src="../assets/rainy.png" alt="rainy day">
+      </figure>
+      <figure v-else-if="weather.type_weather == 'Clear'" class="image is-48x48">
+        <img src="../assets/sun.png" alt="sunny day">
+      </figure>
+      <br/>
+      <p class="title is-4">{{ weather.dt }}</p>
+      <p class="subtitle is-6">{{weather.temp}}°C</p>
+  
+      <div class="content">
+        <p>Se siente como: {{ weather.feels_like }}°C</p>
+          <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
+          <p>Humedad: {{ weather.humidity }}%</p>
+        <div class="tags has-addons">
+          <span class="tag is-info is-medium">{{ weather.temp_min }}°C</span>
+          <span class="tag is-primary is-medium">{{ weather.temp_max }}°C</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

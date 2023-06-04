@@ -18,7 +18,8 @@ export const useWeather = defineStore('weathers', {
       temp_min: 0,
       temp_max: 0,
       pressure: 0,
-      humidity: 0
+      humidity: 0,
+      type_weather: ''
     },
     weathers: [],
     selectedPeriod: 'Ahora'
@@ -38,6 +39,7 @@ export const useWeather = defineStore('weathers', {
           temp_max: data.main.temp_max,
           pressure: data.main.pressure,
           humidity: data.main.humidity,
+          type_weather: data.weather[0].main,
         };
         useWeather().updateWeather(weather);
       })
@@ -51,7 +53,7 @@ export const useWeather = defineStore('weathers', {
       .then(data => {
         console.log(data);
         const { list } = data;
-        const weathers = list.map((weather: { dt: number; main: { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; }; }) => {
+        const weathers = list.map((weather: { dt: number; main: { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; }; weather:[{main:string;}] }) => {
           return {
             dt: DateTime.fromSeconds(weather.dt).toLocal().toFormat('ff') || '',
             temp: weather.main.temp,
@@ -60,6 +62,7 @@ export const useWeather = defineStore('weathers', {
             temp_max: weather.main.temp_max,
             pressure: weather.main.pressure,
             humidity: weather.main.humidity,
+            type_weather: weather.weather[0].main,
           };
         })
         useWeather().updateWeathers(weathers);
