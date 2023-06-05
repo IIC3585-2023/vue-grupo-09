@@ -70,7 +70,12 @@ export const useCity = defineStore('cities', {
 
     addCity(city: City) {
       this.cities = [...this.cities, city]
-      // this.selectedCity = this.cities.length - 1
+      this.selectedCity = this.cities.length - 1
+      localStorage.setItem('cities', JSON.stringify(this.cities));
     },
+
+    setCities(cities: City[]) {
+      this.cities = cities
+    }
   },
 })
