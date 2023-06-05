@@ -3,6 +3,11 @@ import { ref, computed } from 'vue';
 import FormInput from './FormInput.vue';
 import { City } from '../scripts/city';
 import { validate, required, isValidLatitude, isValidLongitude } from '../scripts/validation';
+import { useCity } from '../stores/city';
+import { useModal } from '../composables/modal';
+
+const modal = useModal();
+const cityStore = useCity();
 
 const name = ref('');
 const nameStatus = computed(() => {
@@ -29,7 +34,9 @@ function handleSubmit() {
     latitude: Number(latitude.value),
     longitude: Number(longitude.value),
   }
-  console.log(newCity);
+
+  cityStore.addCity(newCity)
+  modal.hideModal()
 }
 </script>
 
@@ -37,10 +44,10 @@ function handleSubmit() {
   <form class="form" @submit.prevent="handleSubmit">
     <FormInput name="Nombre de la ciudad" v-model="name" :status="nameStatus" />
     <!-- v-model is equivalent to:
-      <CustomInput
-        :modelValue="searchText"
-        @update:modelValue="newValue => searchText = newValue"
-      /> -->
+        <CustomInput
+          :modelValue="searchText"
+          @update:modelValue="newValue => searchText = newValue"
+        /> -->
     <FormInput name="Latitud" v-model="latitude" :status="latitudeStatus" />
     <FormInput name="Longitud" v-model="longitude" :status="longitudeStatus" />
     <button class="button is-primary" :disabled="isInvalid">Añadir</button>
