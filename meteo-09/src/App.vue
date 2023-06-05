@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import NavBar from './components/NavBar.vue';
 import Modal from './components/Modal.vue';
+import { useCity } from './stores/city';
+
+const cityStore = useCity();
+
+if (localStorage.getItem('cities')) {
+  cityStore.setCities(JSON.parse(localStorage.getItem('cities')!));
+}
 </script>
 
 <template>

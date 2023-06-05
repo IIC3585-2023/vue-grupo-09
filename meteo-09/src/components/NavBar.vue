@@ -28,7 +28,7 @@ watch(() => cityStore.selectedCity, (newIdx) => {
           </select>
         </div>
       </div>
-      <button class="button" @click="modal.showModal">Añadir ciudad</button>
+      <button class="button mx-2" @click="modal.showModal">Añadir ciudad</button>
     </div>
     <div class="navbar-end">
       <div class="buttons">
