@@ -3,7 +3,7 @@ import { City } from '../scripts/city'
 
 interface CityState {
   cities: City[]
-  selectedCity: City
+  selectedCity: number
 }
 
 export const useCity = defineStore('cities', {
@@ -60,16 +60,12 @@ export const useCity = defineStore('cities', {
         longitude: 28.9784,
       }
     ],
-    selectedCity: {
-      name: 'Santiago',
-      latitude: -33.45694,
-      longitude: -70.64827,
-    },
+    selectedCity: 0,
   }),
 
   actions: {
-    setSelectedCity(city: City) {
-      this.selectedCity = city
+    setSelectedCity(idx: number) {
+      this.selectedCity = idx
     },
 
     addCity(city: City) {

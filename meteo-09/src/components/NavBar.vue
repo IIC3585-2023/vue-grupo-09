@@ -9,8 +9,7 @@ const cityStore = useCity();
 
 function onCityChange(event: Event) {
   const selectedCityIdx = Number((event.target as HTMLSelectElement).value);
-  // Do something with the selected city
-  console.log('Selected city:', cityStore.cities[selectedCityIdx]);
+  cityStore.setSelectedCity(selectedCityIdx);
 }
 </script>
 
