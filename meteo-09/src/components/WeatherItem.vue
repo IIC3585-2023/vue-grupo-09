@@ -18,7 +18,7 @@ defineProps<{
     <div class="card-content">
       <div class="bg-light-grey">
         <div class="is-flex is-justify-content-space-between">
-          <p class="title is-1 has-text-white">
+          <p class="title is-1 has-text-white ">
             {{
               DateTime.fromFormat(dayWeather.dt, "ff").toFormat(
                 "cccc, d LLLL yyyy"
@@ -63,7 +63,7 @@ defineProps<{
   padding: 1rem;
   background-color: #3e3636d4;
   border: 2px solid #5b5454d4;
-  border-radius: 5%;
+  border-radius: 5px;
   margin: 0 4px;
 }
 </style>
