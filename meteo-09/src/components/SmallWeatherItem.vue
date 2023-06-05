@@ -7,10 +7,10 @@ defineProps<{
   weather: Weather;
 }>();
 </script>
+
 <template>
   <div
-    class="bg-light-grey column is-1 is-flex is-flex-direction-column is-align-items-center is-justify-content-space-around"
-  >
+    class="bg-light-grey column is-1 is-flex is-flex-direction-column is-align-items-center is-justify-content-space-around">
     <p class="title is-5 mb-2 has-text-white">
       {{
         DateTime.fromFormat(weather.dt, "ff").startOf("hour").toFormat("HH:mm")

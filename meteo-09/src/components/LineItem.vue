@@ -49,20 +49,12 @@ const biggestValue = (weather: Weather[], daily: Weather): number => {
 <template>
   <div class="columns pt-6 pb-4">
     <div class="bg-light-grey column is-3">
-      <div
-        class="py-2 is-flex is-flex-direction-row pl-3 is-flex is-flex-direction-row"
-      >
-        <weather-icon
-          class="mr-6 mt-3"
-          size="is-128x128"
-          :weather="dayWeather.type_weather"
-        />
-        <div
-          class="is-flex is-flex-direction-column is-align-items-center is-justify-content-space-around"
-        >
+      <div class="py-2 is-flex is-flex-direction-row pl-3 is-flex is-flex-direction-row">
+        <weather-icon class="mr-6 mt-3" size="is-128x128" :weather="dayWeather.type_weather" />
+        <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-space-around">
           <div style="white-space: nowrap">
             <p class="tag is-6 mb-2 has-text-white has-background-grey">
-              Máxima{{ console.log(dayWeather) }}
+              Máxima
             </p>
             <p class="title is-3 mb-2 has-text-white">
               {{ Math.round(biggestValue(weathers, dayWeather)) }}°C
@@ -81,16 +73,11 @@ const biggestValue = (weather: Weather[], daily: Weather): number => {
       </div>
     </div>
 
-    <SmallWeatherItem
-      :class="{ SmallWeatherItem, collapsed: isCollapsed }"
-      v-for="(weather, index) in weathers"
-      :key="index"
-      :weather="weather"
-      :style="{
+    <SmallWeatherItem :class="{ SmallWeatherItem, collapsed: isCollapsed }" v-for="(weather, index) in weathers"
+      :key="index" :weather="weather" :style="{
         transform: `translateX(${getTranslationValue(index)})`,
         opacity: getOpacityValue(),
-      }"
-    />
+      }" />
   </div>
 </template>
 

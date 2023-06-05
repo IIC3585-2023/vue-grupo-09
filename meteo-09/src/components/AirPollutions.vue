@@ -19,7 +19,7 @@ const fetchData = async () => {
 await fetchData()
 
 watch(() => [cityStore.cities[cityStore.selectedCity].latitude, cityStore.cities[cityStore.selectedCity].longitude], async () => {
-  await fetchData() 
+  await fetchData()
 })
 </script>
 
