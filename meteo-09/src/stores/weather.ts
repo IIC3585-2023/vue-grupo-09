@@ -10,7 +10,6 @@ interface WeatherState {
   selectedPeriod: PeriodTemp
 }
 
-
 export const useWeather = defineStore('weathers', {
   state: (): WeatherState => ({
     weather: {
@@ -89,7 +88,6 @@ export const useWeather = defineStore('weathers', {
   getters: {
     filteredWeathers: (state): Weather[][] => {
       switch (state.selectedPeriod) {
-  
         case periodsTemp[0]: // Hoy
           const todayWeathers = state.weathers.filter(weather =>
             DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal(), 'day')
@@ -112,7 +110,6 @@ export const useWeather = defineStore('weathers', {
           results.push(daily);
         }
         return results;
-
       }
     }
   }
