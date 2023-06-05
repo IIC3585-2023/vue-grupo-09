@@ -55,6 +55,11 @@ function handleSubmit() {
 <template>
   <form class="form" @submit.prevent="handleSubmit">
     <FormInput name="Nombre de la ciudad" v-model="name" :status="nameStatus" />
+    <!-- v-model is equivalent to:
+        <CustomInput
+          :modelValue="searchText"
+          @update:modelValue="newValue => searchText = newValue"
+        /> -->
     <FormInput name="País de la ciudad" v-model="country" :status="countryStatus" />
     <FormInput name="Latitud" v-model="latitude" :status="latitudeStatus" />
     <FormInput name="Longitud" v-model="longitude" :status="longitudeStatus" />

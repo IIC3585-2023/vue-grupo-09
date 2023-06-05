@@ -53,7 +53,7 @@ describe('FormInput', () => {
       }
     })
 
-    expect (wrapper.find('.is-danger').exists()).toBe(true)
+    expect(wrapper.find('.is-danger').exists()).toBe(true)
   });
 });
 
@@ -70,6 +70,6 @@ describe('FormInput', () => {
       }
     })
 
-    expect (wrapper.find('.is-danger').exists()).toBe(false)
+    expect(wrapper.find('.is-danger').exists()).toBe(false)
   });
 });
