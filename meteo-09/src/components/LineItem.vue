@@ -29,7 +29,7 @@ const getOpacityValue = () => {
       <div class="py-2 is-flex is-flex-direction-row pl-3 is-flex is-flex-direction-row">
         <weather-icon class="mr-6 mt-3" size="is-128x128" :weather="dayWeather.type_weather" />
         <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-space-around">
-          <div>
+          <div style="white-space: nowrap;">
             <p class="tag is-6 mb-2 has-text-white has-background-grey">
               Máxima
             </p>
