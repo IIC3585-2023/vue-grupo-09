@@ -1,14 +1,26 @@
 <script setup lang="ts">
+import { watch } from 'vue';
 import { useWeather } from '../stores/weather'
+import { useCity } from '../stores/city';
 import WeatherItem from '../components/WeatherItem.vue';
 import { periods } from '../scripts/constants';
 
 const weatherStore = useWeather()
+const cityStore = useCity()
 
-await Promise.all([
-  weatherStore.fetchWeather(),
-  weatherStore.fetchWeathers()
-])
+const fetchData = async () => {
+  const { latitude, longitude } = cityStore.cities[cityStore.selectedCity]
+  await Promise.all([
+    weatherStore.fetchWeather(latitude, longitude),
+    weatherStore.fetchWeathers(latitude, longitude)
+  ])
+}
+
+await fetchData() // Initial fetch
+
+watch(() => [cityStore.cities[cityStore.selectedCity].latitude, cityStore.cities[cityStore.selectedCity].longitude], async () => {
+  await fetchData() // Fetch again when latitude or longitude changes
+})
 </script>
 
 <template>

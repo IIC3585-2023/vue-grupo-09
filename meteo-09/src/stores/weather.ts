@@ -26,8 +26,8 @@ export const useWeather = defineStore('weathers', {
   }),
 
   actions: {
-    async fetchWeather() {
-      await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-33.45694&lon=-70.64827&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
+    async fetchWeather(latitude: number, longitude: number) {
+      await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -48,8 +48,8 @@ export const useWeather = defineStore('weathers', {
       });
     },
 
-    async fetchWeathers() {
-      await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=-33.45694&lon=-70.64827&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
+    async fetchWeathers(latitude: number, longitude: number) {
+      await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
     .then(response => response.json())
       .then(data => {
         console.log(data);

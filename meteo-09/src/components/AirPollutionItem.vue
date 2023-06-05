@@ -30,12 +30,12 @@ const aqiColors: { [key: number]: string } = {
             <tr>
               <th>CO (μg/m3)</th>
               <th>NO (μg/m3)</th>
-              <th>NO<sub>2</sub> (μg/m3)</th>
-              <th>O<sub>3</sub> (μg/m3)</th>
-              <th>SO<sub>2</sub> (μg/m3)</th>
-              <th>NH<sub>3</sub> (μg/m3)</th>
-              <th>PM<sub>2.5</sub> (μg/m3)</th>
-              <th>PM<sub>10</sub> (μg/m3)</th>
+              <th>NO<sub>2</sub> (μg/m<sup>3</sup>)</th>
+              <th>O<sub>3</sub> (μg/m<sup>3</sup>)</th>
+              <th>SO<sub>2</sub> (μg/m<sup>3</sup>)</th>
+              <th>NH<sub>3</sub> (μg/m<sup>3</sup>)</th>
+              <th>PM<sub>2.5</sub> (μg/m<sup>3</sup>)</th>
+              <th>PM<sub>10</sub> (μg/m<sup>3</sup>)</th>
             </tr>
           </thead>
           <tbody>
