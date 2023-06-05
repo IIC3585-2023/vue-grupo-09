@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import CityForm from './CityForm.vue';
 import { useModal } from '../composables/modal';
 import { useCity } from '../stores/city';
 
 const modal = useModal();
-
 const cityStore = useCity();
 
-function onCityChange(event: Event) {
-  const selectedCityIdx = Number((event.target as HTMLSelectElement).value);
-  cityStore.setSelectedCity(selectedCityIdx);
+const selectedCityIdx = ref(cityStore.selectedCity);
+
+function onCityChange() {
+  cityStore.setSelectedCity(selectedCityIdx.value);
 }
+
+watch(() => cityStore.selectedCity, (newIdx) => {
+  selectedCityIdx.value = newIdx;
+});
 </script>
 
 <template>
@@ -18,7 +23,7 @@ function onCityChange(event: Event) {
     <div class="navbar-start">
       <div class="control">
         <div class="select">
-          <select @change="onCityChange">
+          <select v-model="selectedCityIdx" @change="onCityChange">
             <option v-for="(city, idx) in cityStore.cities" :key="city.name" :value="idx">{{ city.name }}</option>
           </select>
         </div>
