@@ -2,6 +2,9 @@
 import { Weather } from "../scripts/weather";
 import LineItem from "../components/LineItem.vue";
 import { DateTime } from "luxon";
+import { useCity } from "../stores/city";
+
+const cityStore = useCity();
 
 defineProps<{
   weathers: Weather[];
@@ -10,7 +13,8 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card my-2 weather-card">
+  <div class="card my-2 weather-card"
+    :style="`background-image: url(${cityStore.cities[cityStore.selectedCity].imageURL})`">
     <div class="card-content">
       <div class="is-flex is-justify-content-space-between">
         <p class="title is-1 has-text-white">
@@ -35,7 +39,7 @@ defineProps<{
 
       <br />
 
-      <div class="content has-text-grey">
+      <div class="content has-text-grey has-text-bold">
         <p>Se siente como: {{ dayWeather.feels_like }}°C</p>
         <p>Presión atmosférica: {{ dayWeather.pressure }}hPa</p>
         <p>Humedad: {{ dayWeather.humidity }}%</p>
@@ -47,7 +51,6 @@ defineProps<{
 
 <style scoped>
 .weather-card {
-  background-image: url("../assets/santiago.jpg");
   background-size: cover;
   background-position: center;
 }
