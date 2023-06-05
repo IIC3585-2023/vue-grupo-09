@@ -17,7 +17,9 @@ defineProps<{
       }}
     </p>
     <weather-icon :weather="weather.type_weather" />
-    <div class="tag has-background-grey-light has-text-black is-medium">{{ weather.temp }}°C</div>
+    <div class="tag has-background-grey-light has-text-black is-medium">
+      {{ weather.temp }}°C
+    </div>
   </div>
 </template>
 

@@ -16,10 +16,10 @@ const fetchData = async () => {
   ])
 }
 
-await fetchData() // Initial fetch
+await fetchData()
 
 watch(() => [cityStore.cities[cityStore.selectedCity].latitude, cityStore.cities[cityStore.selectedCity].longitude], async () => {
-  await fetchData() // Fetch again when latitude or longitude changes
+  await fetchData() 
 })
 </script>
 
