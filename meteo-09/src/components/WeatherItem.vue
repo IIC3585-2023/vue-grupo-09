@@ -1,36 +1,54 @@
 <script setup lang="ts">
-import { Weather } from '../scripts/weather';
+import { Weather } from "../scripts/weather";
+import LineItem from "../components/LineItem.vue";
+import { DateTime } from "luxon";
 
 defineProps<{
-  weather: Weather
-}>()
+  weathers: Weather[];
+  dayWeather: Weather;
+}>();
 </script>
 
 <template>
-  <div class="card my-2">
+  <div class="card my-2 weather-card">
     <div class="card-content">
-      <figure v-if="weather.type_weather == 'Clouds'" class="image is-48x48">
-        <img src="../assets/cloudy.png" alt="cloudy day">
-      </figure>
-      <figure v-else-if="weather.type_weather == 'Rain'" class="image is-48x48">
-        <img src="../assets/rainy.png" alt="rainy day">
-      </figure>
-      <figure v-else-if="weather.type_weather == 'Clear'" class="image is-48x48">
-        <img src="../assets/sun.png" alt="sunny day">
-      </figure>
-      <br />
-      <p class="title is-4">{{ weather.dt }}</p>
-      <p class="subtitle is-6">{{ weather.temp }}°C</p>
-
-      <div class="content">
-        <p>Se siente como: {{ weather.feels_like }}°C</p>
-        <p>Presión atmosférica: {{ weather.pressure }}hPa</p>
-        <p>Humedad: {{ weather.humidity }}%</p>
-        <div class="tags has-addons">
-          <span class="tag is-info is-medium">{{ weather.temp_min }}°C</span>
-          <span class="tag is-primary is-medium">{{ weather.temp_max }}°C</span>
-        </div>
+      <div class="is-flex is-justify-content-space-between">
+        <p class="title is-1 has-text-white">
+          {{
+            DateTime.fromFormat(dayWeather.dt, "ff").toFormat(
+              "cccc, d LLLL yyyy"
+            )
+          }}
+        </p>
+        <p class="title is-2 has-text-white mr-6 has-text-weight-light">
+          Santiago,
+        </p>
       </div>
+      <div class="is-flex is-justify-content-space-between">
+        <p class="subtitle is-4 has-text-white">
+          {{ DateTime.fromFormat(dayWeather.dt, "ff").toFormat("HH:mm") }}
+        </p>
+        <p class="title is-3 has-text-white mr-6 has-text-weight-light">
+          Chile
+        </p>
+      </div>
+
+      <br />
+
+      <div class="content has-text-grey">
+        <p>Se siente como: {{ dayWeather.feels_like }}°C</p>
+        <p>Presión atmosférica: {{ dayWeather.pressure }}hPa</p>
+        <p>Humedad: {{ dayWeather.humidity }}%</p>
+      </div>
+      <LineItem :weathers="weathers" :dayWeather="dayWeather" />
     </div>
   </div>
 </template>
+
+<style scoped>
+.weather-card {
+  background-image: url("../assets/santiago.jpg");
+  background-size: cover;
+  background-position: center;
+}
+</style>

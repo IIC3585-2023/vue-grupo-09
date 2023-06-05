@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import { DateTime } from 'luxon'
 import { Weather } from '../scripts/weather'
-import { Period, periods } from '../scripts/constants'
+import { PeriodTemp, periodsTemp } from '../scripts/constants'
 
 interface WeatherState {
   weather: Weather
-  weathers: Weather[]
-  selectedPeriod: Period
+  weathers: Weather[],
+  daily_weathers: Weather[][],
+  selectedPeriod: PeriodTemp
 }
+
 
 export const useWeather = defineStore('weathers', {
   state: (): WeatherState => ({
@@ -22,7 +24,8 @@ export const useWeather = defineStore('weathers', {
       type_weather: ''
     },
     weathers: [],
-    selectedPeriod: 'Ahora',
+    daily_weathers: [],
+    selectedPeriod: 'Hoy',
   }),
 
   actions: {
@@ -30,7 +33,6 @@ export const useWeather = defineStore('weathers', {
       await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         const weather: Weather = {
           dt: DateTime.fromSeconds(data.dt).toLocal().toFormat('ff') || '',
           temp: data.main.temp,
@@ -52,7 +54,6 @@ export const useWeather = defineStore('weathers', {
       await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=es`)
     .then(response => response.json())
       .then(data => {
-        console.log(data);
         const weathers = data.list.map((weather: { dt: number; main: { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; }; weather: any }) => {
           return {
             dt: DateTime.fromSeconds(weather.dt).toLocal().toFormat('ff') || '',
@@ -72,7 +73,7 @@ export const useWeather = defineStore('weathers', {
       });
     },
 
-    setSelectedPeriod(period: Period) {
+    setSelectedPeriod(period: PeriodTemp) {
       this.selectedPeriod = period
     },
 
@@ -86,16 +87,32 @@ export const useWeather = defineStore('weathers', {
   },
 
   getters: {
-    filteredWeathers: (state): Weather[] => {
+    filteredWeathers: (state): Weather[][] => {
       switch (state.selectedPeriod) {
-        case periods[0]: // Ahora
-          return [state.weather]
-        case periods[1]: // Hoy
-          return state.weathers.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal(), 'day'))
-        case periods[2]: // Mañana
-          return state.weathers.filter(weather => DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: 1 }), 'day'))
-        case periods[3]: // Próximos 5 días
-          return state.weathers
+  
+        case periodsTemp[0]: // Hoy
+          const todayWeathers = state.weathers.filter(weather =>
+            DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal(), 'day')
+          );
+          
+          return [[state.weather, ...todayWeathers]]
+        case periodsTemp[1]: // Mañana
+          const tumorrowWeathers = state.weathers.filter(weather =>
+            DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: 1 }), 'day')
+          );
+          
+          return [tumorrowWeathers]
+        case periodsTemp[2]: // Próximos 5 días
+          
+        const results = [];
+        for (let i = 1; i <= 5; i++) {
+          const daily = state.weathers.filter(weather =>
+            DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: i }), 'day')
+          );
+          results.push(daily);
+        }
+        return results;
+
       }
     }
   }
