@@ -2,7 +2,7 @@
 import { watch } from 'vue';
 import { useAirPollution } from '../stores/airPollution'
 import { useCity } from '../stores/city';
-import { periods } from '../scripts/constants';
+import { periodsPol } from '../scripts/constants';
 import AirPollutionItem from './AirPollutionItem.vue';
 
 const airPollutionStore = useAirPollution()
@@ -23,12 +23,11 @@ watch(() => [cityStore.cities[cityStore.selectedCity].latitude, cityStore.cities
 })
 </script>
 
-
 <template>
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <!-- : -> v-bind: and @ -> v-on: -->
-      <a v-for="period of periods" :key="period" :class="{ 'is-active': period === airPollutionStore.selectedPeriod }"
+      <a v-for="period of periodsPol" :key="period" :class="{ 'is-active': period === airPollutionStore.selectedPeriod }"
         @click="airPollutionStore.setSelectedPeriod(period)">
         {{ period }}
       </a>

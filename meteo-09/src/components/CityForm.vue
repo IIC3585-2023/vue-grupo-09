@@ -44,10 +44,10 @@ function handleSubmit() {
   <form class="form" @submit.prevent="handleSubmit">
     <FormInput name="Nombre de la ciudad" v-model="name" :status="nameStatus" />
     <!-- v-model is equivalent to:
-        <CustomInput
-          :modelValue="searchText"
-          @update:modelValue="newValue => searchText = newValue"
-        /> -->
+      <CustomInput
+        :modelValue="searchText"
+        @update:modelValue="newValue => searchText = newValue"
+      /> -->
     <FormInput name="Latitud" v-model="latitude" :status="latitudeStatus" />
     <FormInput name="Longitud" v-model="longitude" :status="longitudeStatus" />
     <button class="button is-primary" :disabled="isInvalid">Añadir</button>
