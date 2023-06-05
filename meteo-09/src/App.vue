@@ -14,6 +14,10 @@ if (localStorage.getItem('cities')) {
   <Modal />
   <div class="section">
     <div class="container">
+      <div class="app-header">
+        <h1 class="app-name">ClimaPuro</h1>
+        <p class="app-slogan">Información precisa sobre el clima y la calidad del aire en tiempo real</p>
+      </div>
       <NavBar />
       <RouterView />
     </div>
@@ -22,4 +26,19 @@ if (localStorage.getItem('cities')) {
 
 <style>
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.app-slogan {
+  font-size: 14px;
+  color: #888;
+}
 </style>
