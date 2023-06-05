@@ -97,11 +97,11 @@ export const useWeather = defineStore('weathers', {
           
           return [[state.weather, ...todayWeathers]]
         case periodsTemp[1]: // Mañana
-          const tumorrowWeathers = state.weathers.filter(weather =>
+          const tomorrowWeathers = state.weathers.filter(weather =>
             DateTime.fromFormat(weather.dt, 'ff').hasSame(DateTime.now().toLocal().plus({ days: 1 }), 'day')
           );
           
-          return [tumorrowWeathers]
+          return [tomorrowWeathers]
         case periodsTemp[2]: // Próximos 5 días
           
         const results = [];
